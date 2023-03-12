@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Patch, Get, UseGuards, Delete } from '@nestjs/common';
+import { JwtGuard } from './../auth/guard';
 
+@UseGuards(JwtGuard)
 @Controller('user')
-export class UserController {}
+export class UserController {
+  @Patch(':id')
+  editUser() {}
+
+  @Delete(':id')
+  deleteUser() {}
+}

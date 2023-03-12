@@ -16,4 +16,8 @@ export class SignUpDTO {
   @IsString()
   @IsOptional()
   lastName?: string;
+
+  @IsString()
+  @IsNotEmpty()
+  garageName: string;
 }
