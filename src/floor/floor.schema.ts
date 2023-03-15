@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type GarageFloorDocument = GarageFloor & Document;
+export type GarageFloorDocument = Floor & Document;
 
 export enum VehicleType {
   SEDAN,
@@ -21,19 +21,18 @@ export interface Parking {
 }
 
 @Schema()
-class PartialUser {}
+class PartialUser {
+  _id: string;
+}
 const PartialUserSchema = SchemaFactory.createForClass(PartialUser);
 
 @Schema()
-export class GarageFloor {
+export class Floor {
   @Prop({ required: true })
   floor: string;
 
   @Prop({ type: PartialUserSchema, required: true })
   owner: PartialUser;
-
-  @Prop({ required: true })
-  garage: Parking[];
 
   @Prop({ default: Date.now })
   createdAt: Date;
@@ -42,4 +41,4 @@ export class GarageFloor {
   updatedAt: Date;
 }
 
-export const GarageFloorSchema = SchemaFactory.createForClass(GarageFloor);
+export const GarageFloorSchema = SchemaFactory.createForClass(Floor);

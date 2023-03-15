@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export enum VehicleType {
-  EMPTY = null,
+  EMPTY = 'free',
+  MAINTENANCE = 'maintenance',
   SEDAN = 'sedan',
   SUV = 'suv',
   MOTORBIKE = 'motorbike',
@@ -14,7 +15,7 @@ class PartialFloor {}
 const PartialFloorSchema = SchemaFactory.createForClass(PartialFloor);
 
 @Schema()
-export class ParkingSpace {
+export class Parking {
   @Prop({ default: null })
   firstName: string;
 
@@ -30,9 +31,6 @@ export class ParkingSpace {
   @Prop({ default: VehicleType.EMPTY, enum: Object.values(VehicleType) })
   type: string;
 
-  @Prop({ default: null })
-  model: string;
-
   @Prop({ default: null, length: 10 })
   licence: string;
 
@@ -40,4 +38,4 @@ export class ParkingSpace {
   floor: PartialFloor;
 }
 
-export const ParkingSpaceSchema = SchemaFactory.createForClass(ParkingSpace);
+export const ParkingSpaceSchema = SchemaFactory.createForClass(Parking);
